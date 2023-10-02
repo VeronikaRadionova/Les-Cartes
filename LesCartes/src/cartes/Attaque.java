@@ -4,14 +4,21 @@ public class Attaque extends Bataille {
 
 	public Attaque(int nombre, Type type) {
 		super(nombre, type);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public String toString() {
-		return "Attaque [toString()=" + super.toString() + "]";
+		switch (getType()) {
+		case FEU: 
+			return "Feu rouge";
+		case ESSENCE: 
+			return "Panne d'essence";
+		case ACCIDENT: 
+			return "Accident";
+		case CREVAISON:
+			return "Crevaison";
+		}
+		return "Erreur";
 	}
-	
-	
 
 }

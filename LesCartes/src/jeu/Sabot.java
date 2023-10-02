@@ -1,71 +1,113 @@
 package jeu;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import cartes.Carte;
 
-public class Sabot {
-	private Carte[] pioche;
+public class Sabot implements Iterable <Carte> {
+	private Carte[] cartes;
 	private int nbCartes = 0;
-	private int nbMax = 110; 
+	//private int nbMax = 110;
+	private int nbOperations = 0;
 	
-	// classe interne ITERATOR
+	
+	
+	/* CLASSE INTERNE ITERATEUR */
+	
+	public Iterator <Carte> iterator() {
+		return new Iterateur();
+	}
 	
 	private class Iterateur implements Iterator <Carte> {
-		private int indiceItrateur = 0;
+		private int indiceIterateur = 0;
 		private boolean nextEffectue = false;
+		private int nbOperationsI = nbOperations;
 
 		@Override
 		public boolean hasNext() {
-			// TODO Auto-generated method stub
+			if (indiceIterateur < nbCartes) return true;
 			return false;
 		}
 
 		@Override
 		public Carte next() {
-			// TODO Auto-generated method stub
-			return null;
+			verificationConcurrence();
+			Carte carte = cartes[indiceIterateur];
+			indiceIterateur++;
+			nextEffectue = true;
+			return carte;
 		}
 		
 		public void remove() {
-			// TODO 
+			verificationConcurrence();
+			if (nbCartes == 0 || !nextEffectue) {
+				throw new IllegalStateException();
+			}
+			int i = indiceIterateur;
+			while (i < nbCartes) {
+				cartes[i-1] = cartes[i];
+				i++;
+			}
+			nbCartes--;
+			nextEffectue = false;
+			nbOperations++;
+			nbOperationsI++;
 		}
 		
+		private void verificationConcurrence() {
+			if (nbOperationsI != nbOperations) {
+				throw new ConcurrentModificationException();
+			}
+		}
 	}
 	
-	public Iterator <Sabot> iterator() { // il y a des problemes
-		return new Iterateur();
-	}
+	/* FIN CLASSE INTERNE ITERATEUR */
 	
-	public Sabot(Carte[] pioche, int nbCartes) {
+	
+	public Sabot(int nbCartes) {
 		this.nbCartes = nbCartes;
-		this.pioche = new Carte[nbCartes];
+		this.cartes = new Carte[nbCartes];
 	}
 	
-	public boolean estVide() { // ? nujno li dobavlyat' v scobki chtoto
+	public boolean estVide() {
 		if (nbCartes == 0) return true;
 		return false;
 	}
 	
 	private void ajouterCarte(Carte carte) {
-		if (nbCartes < nbMax) {
+		if (nbCartes < this.cartes.length) {
+			this.cartes[nbCartes] = carte;
 			nbCartes++;
-			pioche[nbCartes-1] = carte;
-		} else throw new NoSuchElementException();
+			nbOperations++;
+		} else throw new ArrayIndexOutOfBoundsException("Plus de place");
 	}
 	
-	public void ajouterFamilleCarte (Carte carte, int nombre) {
+	public void ajouterFamilleCarte(Carte carte) {
 		int i = 0;
-		while (i < nombre) {
+		while (i < carte.getNombre()) {
 			ajouterCarte(carte);
+			i++;
 		}
 	}
 	
-	public void ajouterFamilleCarte (Carte...cartes) {
+	public void ajouterFamilleCarte(Carte...cartes) {
 		int i = 0;
 		while (i < cartes.length) {
-			ajouterCarte(cartes[i]);
+			Carte carte = cartes[i];
+			ajouterFamilleCarte(carte);
+			i++;
 		}
+	}
+	
+	public Carte piocher() {
+		Carte carte = null;
+		Iterator<Carte> iterCarte = iterator();
+		if (iterCarte.hasNext()) {
+			carte = iterCarte.next();
+			iterCarte.remove();
+		}
+		return carte;
 	}
 }

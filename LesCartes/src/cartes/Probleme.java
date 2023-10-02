@@ -7,9 +7,10 @@ public abstract class Probleme extends Carte {
 	public Probleme(int nombre, Type type) {
 		super(nombre);
 		this.type = type;
-		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+	public Type getType() {
+		return type;
+	}
 
 }
