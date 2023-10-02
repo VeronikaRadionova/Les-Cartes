@@ -21,5 +21,12 @@ public class Parade extends Bataille {
 		return "Erreur";
 	}
 
+	public boolean equals(Object obj) {
+		if (obj instanceof Parade) {
+			Parade parade = (Parade) obj;
+			return type == parade.getType();
+		}
+		return false;
+	}
 	
 }

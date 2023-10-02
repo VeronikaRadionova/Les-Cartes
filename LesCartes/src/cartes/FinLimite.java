@@ -6,4 +6,8 @@ public class FinLimite extends Limite {
 		super(nombre);
 	}
 
+	public boolean equals(Object obj) {
+		if (obj instanceof FinLimite) return true;
+		return false;
+	}
 }

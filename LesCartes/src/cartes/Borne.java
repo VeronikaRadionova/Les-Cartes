@@ -6,7 +6,17 @@ public class Borne extends Carte {
 	public Borne(int nombre, int km) {
 		super(nombre);
 		this.km = km;
-		// TODO Auto-generated constructor stub
+	}
+	
+	public int getKm() {
+		return km;
 	}
 
+	public boolean equals(Object obj) {
+		if (obj instanceof Borne) {
+			Borne borne = (Borne) obj;
+			return km == borne.getKm() ;
+		}
+		return false;
+	}
 }

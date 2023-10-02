@@ -9,7 +9,7 @@ import cartes.Carte;
 public class Sabot implements Iterable <Carte> {
 	private Carte[] cartes;
 	private int nbCartes = 0;
-	//private int nbMax = 110;
+	private int nbMax;
 	private int nbOperations = 0;
 	
 	
@@ -66,9 +66,9 @@ public class Sabot implements Iterable <Carte> {
 	/* FIN CLASSE INTERNE ITERATEUR */
 	
 	
-	public Sabot(int nbCartes) {
+	public Sabot(int nbMax) {
 		this.nbCartes = nbCartes;
-		this.cartes = new Carte[nbCartes];
+		this.cartes = new Carte[nbMax];
 	}
 	
 	public boolean estVide() {

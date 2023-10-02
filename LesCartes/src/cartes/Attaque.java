@@ -21,4 +21,11 @@ public class Attaque extends Bataille {
 		return "Erreur";
 	}
 
+	public boolean equals(Object obj) {
+		if (obj instanceof Attaque) {
+			Attaque attaque = (Attaque) obj;
+			return type == attaque.getType();
+		}
+		return false;
+	}
 }
