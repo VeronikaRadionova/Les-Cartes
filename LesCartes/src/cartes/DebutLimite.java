@@ -10,4 +10,11 @@ public class DebutLimite extends Limite {
 		if (obj instanceof DebutLimite) return true;
 		return false;
 	}
+
+	@Override
+	public String toString() {
+		return "Debut Limite de vitesse: " + nombre;
+	}
+	
+	
 }

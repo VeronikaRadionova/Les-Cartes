@@ -1,7 +1,7 @@
 package cartes;
 
 public abstract class Carte {
-	private int nombre;
+	public int nombre;
 
 	public Carte(int nombre) {
 		this.nombre = nombre;
@@ -9,6 +9,11 @@ public abstract class Carte {
 
 	public int getNombre() {
 		return nombre;
+	}
+
+	@Override
+	public String toString() {
+		return "Carte [nombre=" + nombre + ", toString()=" + super.toString() + "]";
 	}
 	
 	
