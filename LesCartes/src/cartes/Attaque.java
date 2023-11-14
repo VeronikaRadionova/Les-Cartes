@@ -20,6 +20,8 @@ public class Attaque extends Bataille {
 		}
 		return "Erreur";
 	}
+	
+	
 
 	public boolean equals(Object obj) {
 		if (obj instanceof Attaque) {

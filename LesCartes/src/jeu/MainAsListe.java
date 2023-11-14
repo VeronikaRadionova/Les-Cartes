@@ -1,16 +1,29 @@
 package jeu;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import cartes.Carte;
 
 public class MainAsListe implements Main {
-	private List <Carte> listeMain = new ArrayList <Carte>();
+	private List <Carte> listeMain;
+
+	public MainAsListe() {
+		listeMain = new ArrayList <Carte>();
+	}
+	
+	
+	@Override
+	public Iterator<Carte> iterateur() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public void prendre(Carte carte) {
 		listeMain.add(carte);
+		assert listeMain.contains(carte): "la carte n'est pas dans la main du joueur";
 		
 	}
 
@@ -19,14 +32,6 @@ public class MainAsListe implements Main {
 		assert listeMain.contains(carte): "la carte n'est pas dans la main du joueur";
 		listeMain.remove(carte);
 		
-	}
-
-	@Override
-	public boolean contientCarte(Carte carte) {
-		if (listeMain.contains(carte)) {
-			return true;
-		}
-		return false;
 	}
 
 	
