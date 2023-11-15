@@ -1,6 +1,7 @@
 package cartes;
 
 import cartes.Probleme.Type;
+import jeu.Joueur;
 
 public abstract class Carte {
 	public int nombre;
@@ -18,7 +19,7 @@ public abstract class Carte {
 		return "Carte [nombre=" + nombre + ", toString()=" + super.toString() + "]";
 	}
 
-	//public abstract Type getType();
+	abstract boolean appliquer(Joueur j);
 	
 	
 }

@@ -27,6 +27,32 @@ public class Joueur {
 	private Set <Botte> ensembleBotte;
 	
 	
+	
+	public String getNom() {
+		return nom;
+	}
+
+	public MainAsListe getMain() {
+		return main;
+	}
+
+	public List<Limite> getPileLimite() {
+		return pileLimite;
+	}
+
+	public List<Bataille> getPileBataille() {
+		return pileBataille;
+	}
+
+	public List<Borne> getCollectionBorne() {
+		return collectionBorne;
+	}
+	
+	public Set<Botte> getEnsembleBotte() {
+		return ensembleBotte;
+	}
+	
+
 	public Joueur(String nom) {
 		this.nom = nom;
 		main = new MainAsListe();
@@ -42,9 +68,6 @@ public class Joueur {
 		return nom;
 	}
 
-	public Set<Botte> getEnsembleBotte() {
-		return ensembleBotte;
-	}
 
 	public boolean equals(Object obj) {
 		if (obj instanceof Joueur) {
@@ -131,8 +154,37 @@ public class Joueur {
 				return false;
 			}
 		}
+		
 		return true;
+	}
+	
+	public Set<Coup> coupsPossibles(List<Joueur> participants) {
+		Set<Coup> coupsPossibles = new HashSet<>();
+		for(Joueur participant : participants) {
+			for (Carte carte : main.listeMain) {
+				Coup coup = new Coup(carte, participant);
+				if (carte instanceof Botte || carte instanceof Borne || carte instanceof Parade) { // ???
+					coupsPossibles.add(coup);
+				}
+			}
 		}
+		
+		return coupsPossibles;
+	}
+	
+	
+	public Set<Coup> coupsParDefault() {
+		Set<Coup> coupsDefault = new HashSet<>();
+		for (Carte carte : main.listeMain) {
+			Coup coup = new Coup(carte, null);
+			if (!coup.estValide(null)) {
+				coupsDefault.add(coup);
+			}
+		}
+		
+		return coupsDefault;
+		
+	}
 		
 	
 	

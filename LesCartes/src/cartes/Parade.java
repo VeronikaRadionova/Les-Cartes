@@ -1,5 +1,7 @@
 package cartes;
 
+import jeu.Joueur;
+
 public class Parade extends Bataille {
 
 	public Parade(int nombre, Type type) {
@@ -26,6 +28,12 @@ public class Parade extends Bataille {
 			Parade parade = (Parade) obj;
 			return type == parade.getType();
 		}
+		return false;
+	}
+
+	@Override
+	boolean appliquer(Joueur j) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 	

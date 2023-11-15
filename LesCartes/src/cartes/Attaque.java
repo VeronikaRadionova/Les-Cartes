@@ -1,5 +1,7 @@
 package cartes;
 
+import jeu.Joueur;
+
 public class Attaque extends Bataille {
 
 	public Attaque(int nombre, Type type) {
@@ -28,6 +30,12 @@ public class Attaque extends Bataille {
 			Attaque attaque = (Attaque) obj;
 			return type == attaque.getType();
 		}
+		return false;
+	}
+
+	@Override
+	boolean appliquer(Joueur j) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 }

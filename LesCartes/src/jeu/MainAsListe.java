@@ -7,7 +7,7 @@ import java.util.List;
 import cartes.Carte;
 
 public class MainAsListe implements Main {
-	private List <Carte> listeMain;
+	protected List <Carte> listeMain;
 
 	public MainAsListe() {
 		listeMain = new ArrayList <Carte>();
@@ -16,7 +16,6 @@ public class MainAsListe implements Main {
 	
 	@Override
 	public Iterator<Carte> iterateur() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -1,5 +1,7 @@
 package cartes;
 
+import jeu.Joueur;
+
 public class Botte extends Probleme {
 
 	public Botte(int nombre, Type type) {
@@ -27,6 +29,19 @@ public class Botte extends Probleme {
 			return type == botte.getType();
 		}
 		return false;
+	}
+
+	@Override
+	boolean appliquer(Joueur j) {
+		for (Bataille attaque : j.getPileBataille()) {
+			if (attaque instanceof Attaque) {
+				if (this.getType() == attaque.getType()) {
+					j.getPileBataille().remove(attaque);
+				}
+			}
+		}
+		j.getEnsembleBotte().add(this);
+		return true;
 	}
 
 }
