@@ -1,5 +1,6 @@
 package cartes;
 
+import cartes.Probleme.Type;
 import jeu.Joueur;
 import utils.Utils;
 
@@ -21,7 +22,10 @@ public class FinLimite extends Limite {
 
 	@Override
 	boolean appliquer(Joueur j) {
-		// TODO Auto-generated method stub
+		if (!j.possedeBotteType(Type.FEU) && !j.getPileLimite().isEmpty()) {
+			j.getPileLimite().add(this);
+			return true;
+		}
 		return false;
 	}
 	

@@ -29,7 +29,7 @@ public class Borne extends Carte {
 
 	@Override
 	boolean appliquer(Joueur j) {
-		if (!j.estBloque() || j.getKM() <= 1000 /* ou vitesse limite ??? */) {
+		if (!j.estBloque() && j.getKM() + km <= 1000 && j.getPileLimite().isEmpty()) {
 			j.getCollectionBorne().add(this);
 			return true;
 		}
